@@ -1,4 +1,4 @@
-package com.charon.scrollingtabs;
+package com.charon.scrollingtabsdemo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +15,14 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.charon.scrollingtabs.inter.TabAdapter;
-import com.charon.scrollingtabs.view.ScrollingTabsView;
+import com.charon.scrollingtabs.view.ScrollingTabs;
+import com.charon.scrollingtabs.view.ScrollingTabs.TabAdapter;
 
 public class MainActivity extends Activity {
 
 	private ViewPager mViewPager;
 
-	private ScrollingTabsView mScrollingTabsView;
+	private ScrollingTabs mScrollingTabs;
 
 	private List<View> views = new ArrayList<View>();
 
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 
 	private void findView() {
 		mViewPager = (ViewPager) findViewById(R.id.vp);
-		mScrollingTabsView = (ScrollingTabsView) findViewById(R.id.stv);
+		mScrollingTabs = (ScrollingTabs) findViewById(R.id.stv);
 	}
 
 	private void initView() {
@@ -70,8 +70,8 @@ public class MainActivity extends Activity {
 				return views.get(position);
 			}
 		});
-		mScrollingTabsView.setViewPager(mViewPager);
-		mScrollingTabsView.setTabAdapter(new TabAdapter() {
+		mScrollingTabs.setViewPager(mViewPager);
+		mScrollingTabs.setTabAdapter(new TabAdapter() {
 
 			@Override
 			public View getView(int position) {

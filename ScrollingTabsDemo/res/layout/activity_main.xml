@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.charon.scrollingtabs.view.ScrollingTabsView
+    <com.charon.scrollingtabs.view.ScrollingTabs
         android:id="@+id/stv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

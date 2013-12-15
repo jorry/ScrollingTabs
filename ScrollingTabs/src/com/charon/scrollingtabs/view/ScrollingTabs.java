@@ -16,8 +16,6 @@
 
 package com.charon.scrollingtabs.view;
 
-import com.charon.scrollingtabs.inter.TabAdapter;
-
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -28,7 +26,7 @@ import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-public class ScrollingTabsView extends HorizontalScrollView implements
+public class ScrollingTabs extends HorizontalScrollView implements
 		OnPageChangeListener {
 
 	private LinearLayout mContainer;
@@ -47,17 +45,17 @@ public class ScrollingTabsView extends HorizontalScrollView implements
 
 	private PageSelectedListener mPageSelectedListener;
 
-	public ScrollingTabsView(Context context, AttributeSet attrs, int defStyle) {
+	public ScrollingTabs(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
 
-	public ScrollingTabsView(Context context, AttributeSet attrs) {
+	public ScrollingTabs(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
 
-	public ScrollingTabsView(Context context) {
+	public ScrollingTabs(Context context) {
 		super(context);
 		init(context);
 	}
@@ -75,13 +73,17 @@ public class ScrollingTabsView extends HorizontalScrollView implements
 
 		addView(mContainer);
 
+		mWindowWidth = getWindowWidth(context);
+	}
+
+	private int getWindowWidth(Context context) {
 		WindowManager manager = (WindowManager) context
 				.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics outMetrics = new DisplayMetrics();
 		manager.getDefaultDisplay().getMetrics(outMetrics);
-		mWindowWidth = outMetrics.widthPixels;
+		return outMetrics.widthPixels;
 	}
-
+	
 	public void setTabAdapter(TabAdapter adapter) {
 		this.mTabAdapter = adapter;
 		initTabView();
@@ -226,5 +228,28 @@ public class ScrollingTabsView extends HorizontalScrollView implements
 	 */
 	public interface PageSelectedListener {
 		public void onPageSelected(int position);
+	}
+	
+	/**
+	 * Interface to get the tab view.
+	 * 
+	 * @author Charon Chui
+	 */
+	public interface TabAdapter {
+		/**
+		 * Tab View
+		 * 
+		 * @param position
+		 *            Position of the tab view.
+		 * @return View View of the tab.
+		 */
+		public View getView(int position);
+
+		/**
+		 * Segmentation view between two tab.
+		 * 
+		 * @return View, If don't use you this may return null.
+		 */
+		public View getSeparator();
 	}
 }
